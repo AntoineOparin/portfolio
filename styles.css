@@ -1,1 +1,29 @@
 @import 'tailwindcss';
+
+:root {
+  --header-font:
+    'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+header {
+  font-family: var(--header-font);
+}
+
+header p.name {
+  font-weight: 800;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-semibold tracking-tight transition duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[#00C2D9]/60 focus:ring-offset-2 focus:ring-offset-[#30343B] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#00C2D9] to-[#4198F4] text-[#0b1220] shadow-sm hover:shadow-md hover:from-[#00b3c9] hover:to-[#3a8ae6];
+  }
+
+  .btn-ghost {
+    @apply bg-[#2f373b] text-[#8EDEEA] hover:bg-gray-500;
+  }
+}
