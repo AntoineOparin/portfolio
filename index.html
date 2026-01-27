@@ -4,22 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Antoine Oparin — Portfolio</title>
-    <meta
-      name="description"
-      content="Antoine Oparin — Computer Science student and aspiring full‑stack developer. I design, build, and ship performant software with TypeScript, React, and Node.js."
-    />
-    <meta property="og:title" content="Antoine Oparin — Portfolio" />
-    <meta
-      property="og:description"
-      content="I design, build, and ship performant software with TypeScript, React, and Node.js."
-    />
-    <meta property="og:type" content="website" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link href="./output.css" rel="stylesheet" />
-    <link href="./styles.css" rel="stylesheet" />
   </head>
   <body class="bg-[#30343B] text-white">
     <a
@@ -28,23 +17,23 @@
       >Skip to content</a
     >
 
-    <div class="mx-auto max-w-5xl px-6">
-      <header class="py-8 flex items-center gap-6">
+    <div class="mx-auto max-w-6xl px-3">
+      <header class="py-8 flex items-center gap-8">
         <img
-          class="w-24 h-24 rounded-full ring-4 ring-[#2f373b] object-cover"
+          class="w-28 h-28 rounded-full ring-4 ring-[#2f373b] object-cover"
           src="./assets/antoine-oparin-pfp.webp"
           alt="Portrait of Antoine Oparin"
-          width="96"
-          height="96"
+          width="112"
+          height="112"
         />
         <div class="leading-tight">
           <p class="text-sm text-[#8EDEEA]">
             Computer Science Student / Aspiring Full-Stack Developer
           </p>
-          <p class="text-4xl font-extrabold text-[#00C2D9] name">
+          <p class="text-4xl my-2 font-extrabold text-[#00C2D9] name">
             Antoine Oparin
           </p>
-          <p class="text-lg text-[#45bcd4]">
+          <p class="text-sm text-[#45bcd4]">
             TypeScript, JavaScript, React, Node.js and more
           </p>
         </div>
@@ -91,8 +80,8 @@
         <!-- Hero -->
         <section aria-label="Intro">
           <p class="text-[#93A4AE]">
-            <span class="text-green-500">•</span> Montreal, Canada • Open to
-            opportunities
+            <span class="text-green-500 text-2xl">•</span>
+            Montreal, Canada • Open to opportunities
           </p>
           <h1
             class="text-[#4198F4] font-extrabold leading-tight text-5xl md:text-6xl mt-2"
@@ -107,32 +96,44 @@
           </p>
 
           <ul class="flex flex-wrap gap-3 list-none mt-6">
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               TypeScript
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               JavaScript
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               React
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               Node.js
             </li>
           </ul>
 
           <div class="mt-6 flex flex-wrap gap-3">
             <a
-              href="#contact"
-              class="rounded-md bg-[#4198F4] text-[#0b1220] font-semibold px-5 py-2 hover:opacity-90"
-              aria-label="Jump to contact section"
-              >Contact</a
+              href="./AntoineOparin_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
             >
-            <a
-              href="#resume"
-              class="rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
-              >View Resume</a
-            >
+              View Resume
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+                aria-hidden="true"
+              >
+                <path d="M14 3h7v7" />
+                <path d="M21 3 10 14" />
+                <path d="M5 7v12a2 2 0 0 0 2 2h12" />
+              </svg>
+            </a>
           </div>
         </section>
 
@@ -140,9 +141,8 @@
         <section id="about" aria-label="About" class="space-y-3">
           <h2 class="text-2xl font-extrabold text-[#00C2D9]">About</h2>
           <p class="text-[#93A4AE] max-w-3xl">
-            I'm a Computer Science student focused on building reliable,
-            user-friendly web applications. I enjoy working across the stack —
-            from designing clean UIs to optimizing APIs and deployments.
+            I'm a Computer Science student at Dawson College focused on building
+            reliable, user-friendly web applications.
           </p>
         </section>
 
@@ -207,46 +207,53 @@
         <!-- Resume -->
         <section id="resume" aria-label="Resume" class="space-y-3">
           <h2 class="text-2xl font-extrabold text-[#00C2D9]">Resume</h2>
-          <p class="text-[#93A4AE]">
-            Add your resume PDF link below. Replace the placeholder link with
-            your actual resume URL.
-          </p>
-          <a
-            href="#"
-            class="inline-block rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
-            aria-label="Open resume (placeholder)"
-            >Open Resume</a
-          >
+          <p class="text-[#93A4AE]">You can view or download my CV below.</p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="./AntoineOparin_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
+              aria-label="Open resume PDF in a new tab"
+              >Open Resume</a
+            >
+            <a
+              href="./AntoineOparin_CV.pdf"
+              download
+              class="inline-block rounded-md bg-[#4198F4] text-[#0b1220] font-semibold px-5 py-2 hover:opacity-90"
+              aria-label="Download resume PDF"
+              >Download PDF</a
+            >
+          </div>
         </section>
 
         <!-- Skills -->
         <section id="skills" aria-label="Skills" class="space-y-4">
           <h2 class="text-2xl font-extrabold text-[#00C2D9]">Skills</h2>
           <ul class="flex flex-wrap gap-3 list-none">
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               TypeScript
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               JavaScript
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               React
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               Node.js
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               HTML
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               CSS
             </li>
-            <li class="bg-[#2f373b] text-[#93A4AE] rounded-full px-4 py-2">
+            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
               Tailwind CSS
             </li>
           </ul>
         </section>
-
         <!-- Contact -->
         <section id="contact" aria-label="Contact" class="space-y-3">
           <h2 class="text-2xl font-extrabold text-[#00C2D9]">Contact</h2>
@@ -261,11 +268,13 @@
             >
             <a
               href="https://www.linkedin.com/in/antoineoparin/"
+              target="_blank"
               class="rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
               >LinkedIn</a
             >
             <a
               href="https://github.com/AntoineOparin"
+              target="_blank"
               class="rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
               >GitHub</a
             >
