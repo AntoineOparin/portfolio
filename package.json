@@ -4,7 +4,7 @@
   "private": true,
   "description": "Static web developer portfolio for Antoine Oparin",
   "scripts": {
-    "build": "tailwindcss -i styles.css -o output.css --minify"
+    "build": "npx @tailwindcss/cli -i ./styles.css -o ./output.css --minify"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
