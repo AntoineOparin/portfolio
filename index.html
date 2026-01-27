@@ -3,18 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link href="./output.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
   </head>
   <div class="bg-[#30343B]">
-    <header>
-      <img src="./assets/antoine-oparin-pfp.webp" alt="Profile Picture" />
-      <p class="text-[#8EDEEA]">
-        Computer Science Student / Aspiring Full-Stack Developer
-      </p>
-      <p class="text-[#45bcd4]">Antoine Oparin</p>
-      <p class="text-[#45bcd4]">
-        TypeScript, JavaScript, React, Node.js and more
-      </p>
+    <header class="ml-16 py-8 flex items-center gap-6">
+      <img
+        class="w-34 h-34 rounded-full ring-4 ring-[#2f373b] object-cover"
+        src="./assets/antoine-oparin-pfp.webp"
+        alt="Profile Picture"
+      />
+      <div class="leading-tight">
+        <p class="text-sm text-[#8EDEEA]">
+          Computer Science Student / Aspiring Full-Stack Developer
+        </p>
+        <p class="text-4xl font-extrabold text-[#00C2D9] name">
+          Antoine Oparin
+        </p>
+        <p class="text-lg text-[#45bcd4]">
+          TypeScript, JavaScript, React, Node.js and more
+        </p>
+      </div>
     </header>
     <nav>
       <ul class="text-[#8EDEEA]">

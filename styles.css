@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+:root {
+  --header-font:
+    'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+header {
+  font-family: var(--header-font);
+}
+
+header p.name {
+  font-weight: 800;
+}
