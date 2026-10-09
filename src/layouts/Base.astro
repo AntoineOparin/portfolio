@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import type { Lang, Copy } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+  copy: Copy;
+}
+const { lang, copy } = Astro.props;
+const enUrl = new URL('/', Astro.site);
+const frUrl = new URL('/fr/', Astro.site);
+const canonical = lang === 'fr' ? frUrl : enUrl;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{copy.meta.title}</title>
+    <meta name="description" content={copy.meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={copy.meta.title} />
+    <meta property="og:description" content={copy.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#f7f7f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d0e10" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Runs before paint so a saved theme never flashes the other one.
+      document.documentElement.classList.add('js');
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      } catch {}
+    </script>
+  </head>
+  <body id="top">
+    <a
+      href="#main"
+      class="sr-only z-50 rounded-lg bg-accent px-4 py-2 text-on-accent focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      >{copy.skip}</a
+    >
+    <slot />
+  </body>
+</html>

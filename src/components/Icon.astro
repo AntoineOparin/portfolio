@@ -1,0 +1,28 @@
+---
+// Phosphor (regular) icons, inlined at build time. Add a name here to use it.
+import arrowUpRight from '@phosphor-icons/core/regular/arrow-up-right.svg?raw';
+import arrowDown from '@phosphor-icons/core/regular/arrow-down.svg?raw';
+import check from '@phosphor-icons/core/regular/check.svg?raw';
+import copy from '@phosphor-icons/core/regular/copy.svg?raw';
+import download from '@phosphor-icons/core/regular/download-simple.svg?raw';
+import envelope from '@phosphor-icons/core/regular/envelope-simple.svg?raw';
+import github from '@phosphor-icons/core/regular/github-logo.svg?raw';
+import linkedin from '@phosphor-icons/core/regular/linkedin-logo.svg?raw';
+import minus from '@phosphor-icons/core/regular/minus.svg?raw';
+import plus from '@phosphor-icons/core/regular/plus.svg?raw';
+import list from '@phosphor-icons/core/regular/list.svg?raw';
+import moon from '@phosphor-icons/core/regular/moon.svg?raw';
+import sun from '@phosphor-icons/core/regular/sun.svg?raw';
+import x from '@phosphor-icons/core/regular/x.svg?raw';
+
+const icons = { arrowUpRight, arrowDown, check, copy, download, envelope, github, linkedin, list, minus, moon, plus, sun, x };
+
+interface Props {
+  name: keyof typeof icons;
+  class?: string;
+}
+const { name, class: className = 'size-4' } = Astro.props;
+const svg = icons[name].replace('<svg ', `<svg aria-hidden="true" focusable="false" class="${className}" `);
+---
+
+<Fragment set:html={svg} />

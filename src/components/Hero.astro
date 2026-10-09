@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import portrait from '../assets/portrait.webp';
+import { links, type Copy } from '../i18n/content';
+
+interface Props {
+  copy: Copy;
+}
+const { copy } = Astro.props;
+const h = copy.hero;
+---
+
+<section
+  aria-labelledby="hero-title"
+  class="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-6xl items-center gap-12 px-4 py-12 md:grid-cols-12 md:px-6"
+>
+  <div class="md:col-span-7">
+    <h1 id="hero-title" class="rise text-5xl font-semibold tracking-tighter leading-[1.05] md:text-7xl" style="--i: 0">
+      {h.hello}
+    </h1>
+    <p class="rise mt-6 max-w-[30ch] text-xl leading-relaxed text-muted md:text-2xl" style="--i: 1">{h.sub}</p>
+    <p class="rise mt-8 flex items-center gap-2.5 text-sm" style="--i: 2">
+      <!-- Real availability state; the only status dot on the page. -->
+      <span class="size-2 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+      {h.status}
+    </p>
+    <div class="rise mt-8 flex flex-wrap gap-3" style="--i: 3">
+      <a href="#resume" class="btn btn-primary">
+        {h.resume}
+        <Icon name="arrowDown" />
+      </a>
+      <a href={`mailto:${links.email}`} class="btn btn-secondary">
+        <Icon name="envelope" />
+        {h.email}
+      </a>
+    </div>
+  </div>
+
+  <div class="rise md:col-span-5" style="--i: 1">
+    <Image
+      src={portrait}
+      alt={h.portraitAlt}
+      widths={[320, 426]}
+      sizes="(min-width: 768px) 36vw, 80vw"
+      loading="eager"
+      fetchpriority="high"
+      class="mx-auto aspect-[426/519] w-full max-w-[340px] rounded-3xl object-cover md:mr-0 md:max-w-[380px]"
+    />
+  </div>
+</section>

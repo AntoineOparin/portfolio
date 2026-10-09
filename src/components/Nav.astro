@@ -1,0 +1,140 @@
+---
+import Icon from './Icon.astro';
+import type { Lang, Copy } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+  copy: Copy;
+}
+const { lang, copy } = Astro.props;
+const n = copy.nav;
+const sections = [
+  { id: 'story', label: n.story },
+  { id: 'resume', label: n.resume },
+  { id: 'contact', label: n.contact },
+];
+const otherLang = lang === 'en' ? 'fr' : 'en';
+---
+
+<header class="sticky top-0 z-30 bg-bg/80 backdrop-blur-md">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 md:px-6" aria-label="Primary">
+    <a href="#top" class="font-semibold tracking-tight whitespace-nowrap">Antoine Oparin</a>
+
+    <ul class="ml-auto hidden items-center gap-1 sm:flex">
+      {
+        sections.map((s) => (
+          <li>
+            <a
+              href={`#${s.id}`}
+              data-spy={s.id}
+              class="rounded-full px-3.5 py-2 text-sm text-muted transition-colors hover:text-fg aria-[current=true]:bg-accent-soft aria-[current=true]:text-fg"
+            >
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="ml-auto flex items-center gap-1 sm:ml-0">
+      <a
+        href={lang === 'en' ? '/fr/' : '/'}
+        hreflang={otherLang}
+        class="rounded-full px-2.5 py-2 font-mono text-xs text-muted hover:text-fg"
+        >{n.otherLang}<span class="sr-only" lang={otherLang}> ({n.otherLangLabel})</span></a
+      >
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label={n.theme}
+        class="grid size-9 place-items-center rounded-full text-muted hover:text-fg"
+      >
+        <span class="hidden [:root[data-resolved-theme=dark]_&]:block"><Icon name="sun" class="size-[18px]" /></span>
+        <span class="[:root[data-resolved-theme=dark]_&]:hidden"><Icon name="moon" class="size-[18px]" /></span>
+      </button>
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={n.menu}
+        data-label-open={n.menu}
+        data-label-close={n.close}
+        class="grid size-9 place-items-center rounded-full sm:hidden"
+      >
+        <span data-menu-icon="open"><Icon name="list" class="size-5" /></span>
+        <span data-menu-icon="close" hidden><Icon name="x" class="size-5" /></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" hidden class="border-t border-line bg-bg px-4 pt-2 pb-4 sm:hidden">
+    <ul class="grid">
+      {
+        sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} data-spy={s.id} class="block px-2 py-3 text-lg aria-[current=true]:text-accent">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const dark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // data-resolved-theme mirrors what is on screen, so icons can switch on it.
+  function resolve() {
+    root.dataset.resolvedTheme = root.dataset.theme ?? (dark.matches ? 'dark' : 'light');
+  }
+  resolve();
+  dark.addEventListener('change', resolve);
+
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const next = root.dataset.resolvedTheme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    resolve();
+  });
+
+  // Mobile menu
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  function setMenu(open: boolean) {
+    if (!menuBtn || !menu) return;
+    menu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', (open ? menuBtn.dataset.labelClose : menuBtn.dataset.labelOpen) ?? '');
+    menuBtn.querySelector<HTMLElement>('[data-menu-icon=open]')!.hidden = open;
+    menuBtn.querySelector<HTMLElement>('[data-menu-icon=close]')!.hidden = !open;
+  }
+  menuBtn?.addEventListener('click', () => setMenu(menu?.hidden ?? false));
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu && !menu.hidden) {
+      setMenu(false);
+      menuBtn?.focus();
+    }
+  });
+
+  // Scroll spy: highlight the nav link for the section in view.
+  const spyLinks = document.querySelectorAll<HTMLElement>('[data-spy]');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        spyLinks.forEach((l) => l.setAttribute('aria-current', String(l.dataset.spy === entry.target.id)));
+      }
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
+</script>
