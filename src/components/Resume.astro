@@ -1,0 +1,191 @@
+---
+import Icon from './Icon.astro';
+import { links, type Copy } from '../i18n/content';
+
+interface Props {
+  copy: Copy;
+}
+const { copy } = Astro.props;
+const r = copy.resume;
+---
+
+<section id="resume" aria-labelledby="resume-title" class="mx-auto max-w-6xl px-4 py-24 md:px-6 md:py-32">
+  <div class="reveal flex flex-wrap items-end justify-between gap-6">
+    <div>
+      <h2 id="resume-title" class="text-4xl font-semibold tracking-tight md:text-6xl">{r.heading}</h2>
+      <p class="mt-4 text-lg text-muted md:text-xl">{r.sub}</p>
+    </div>
+    <a href={links.cv} download class="btn btn-primary">
+      <Icon name="download" />
+      {r.download}
+    </a>
+  </div>
+
+  <div data-resume data-src={links.cv} class="reveal relative mt-10 overflow-hidden rounded-3xl border border-line bg-well">
+    <div class="absolute top-3 right-3 z-10 flex items-center gap-1 rounded-full border border-line bg-bg/90 p-1 shadow-sm backdrop-blur">
+      <button type="button" data-zoom="-1" aria-label={r.zoomOut} class="grid size-8 place-items-center rounded-full hover:bg-accent-soft disabled:opacity-40">
+        <Icon name="minus" />
+      </button>
+      <output data-zoom-label class="w-12 text-center font-mono text-xs tabular-nums">100%</output>
+      <button type="button" data-zoom="1" aria-label={r.zoomIn} class="grid size-8 place-items-center rounded-full hover:bg-accent-soft disabled:opacity-40">
+        <Icon name="plus" />
+      </button>
+    </div>
+
+    <div data-scroller tabindex="0" role="region" aria-label={r.label} class="max-h-[85dvh] overflow-auto overscroll-contain p-3 pt-16 md:p-10 md:pt-16">
+      <div data-pages class="mx-auto grid w-fit gap-6">
+        <!-- Loading state: same shape as a letter-size page. -->
+        <div data-skeleton class="aspect-[8.5/11] w-[min(816px,calc(100vw-4rem))] rounded-md bg-white/70 motion-safe:animate-pulse">
+          <span class="sr-only">{r.loading}</span>
+        </div>
+      </div>
+      <div data-error hidden class="grid place-items-center gap-4 py-24 text-center">
+        <p class="text-muted">{r.error}</p>
+        <a href={links.cv} class="btn btn-secondary">{r.open} <Icon name="arrowUpRight" /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Legacy pdf.js build plus a stream polyfill (main thread and worker) so the
+  // viewer also works in Safari 18 and older browsers.
+  import '../scripts/stream-polyfill';
+  import PdfWorker from '../scripts/pdf-worker.ts?worker';
+
+  const root = document.querySelector<HTMLElement>('[data-resume]')!;
+  const scroller = root.querySelector<HTMLElement>('[data-scroller]')!;
+  const pagesEl = root.querySelector<HTMLElement>('[data-pages]')!;
+  const label = root.querySelector<HTMLOutputElement>('[data-zoom-label]')!;
+  const zoomBtns = root.querySelectorAll<HTMLButtonElement>('[data-zoom]');
+
+  const ZOOMS = [0.75, 1, 1.25, 1.5, 2];
+  let zoomIndex = 1;
+  let pdfjs: typeof import('pdfjs-dist/legacy/build/pdf.min.mjs');
+  let doc: import('pdfjs-dist').PDFDocumentProxy;
+  let renderId = 0;
+
+  async function load() {
+    try {
+      pdfjs = await import('pdfjs-dist/legacy/build/pdf.min.mjs');
+      pdfjs.GlobalWorkerOptions.workerPort = new PdfWorker();
+      doc = await pdfjs.getDocument({ url: root.dataset.src! }).promise;
+      await render();
+    } catch (err) {
+      console.error(err);
+      pagesEl.hidden = true;
+      root.querySelector<HTMLElement>('[data-error]')!.hidden = false;
+    }
+  }
+
+  // Renders every page: canvas for the picture, a text layer so words can be
+  // selected and searched, and real <a> elements over the PDF's link areas.
+  async function render() {
+    const id = ++renderId;
+    const styles = getComputedStyle(scroller);
+    const available = scroller.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    const frag = document.createDocumentFragment();
+    const pageLinks: HTMLElement[] = [];
+
+    for (let n = 1; n <= doc.numPages; n++) {
+      const page = await doc.getPage(n);
+      const base = page.getViewport({ scale: 1 });
+      const fit = Math.min(available / base.width, 1.5);
+      const scale = fit * ZOOMS[zoomIndex];
+      const viewport = page.getViewport({ scale });
+
+      const wrap = document.createElement('div');
+      wrap.className = 'pdf-page';
+      wrap.style.width = `${Math.floor(viewport.width)}px`;
+      wrap.style.height = `${Math.floor(viewport.height)}px`;
+      wrap.style.setProperty('--total-scale-factor', String(scale));
+
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.floor(viewport.width * dpr);
+      canvas.height = Math.floor(viewport.height * dpr);
+      canvas.setAttribute('aria-hidden', 'true');
+      wrap.append(canvas);
+      await page.render({ canvas, viewport, transform: [dpr, 0, 0, dpr, 0, 0] }).promise;
+
+      const text = document.createElement('div');
+      text.className = 'textLayer';
+      wrap.append(text);
+      await new pdfjs.TextLayer({ textContentSource: await page.getTextContent(), container: text, viewport }).render();
+
+      // The CV's URLs and email are plain text (the PDF has no link
+      // annotations), so turn those text runs into real links.
+      frag.append(wrap);
+      pageLinks.push(wrap);
+    }
+
+    if (id !== renderId) return; // a newer zoom or resize superseded this render
+    pagesEl.replaceChildren(frag);
+    pageLinks.forEach(linkify);
+    label.value = `${Math.round(ZOOMS[zoomIndex] * 100)}%`;
+    zoomBtns[0].disabled = zoomIndex === 0;
+    zoomBtns[1].disabled = zoomIndex === ZOOMS.length - 1;
+  }
+
+  const URL_RE = /https?:\/\/[^\s|]+|[\w.+-]+@[\w-]+\.[\w.]+/g;
+
+  // Runs after the page is in the DOM, since it measures where each match sits.
+  function linkify(wrap: HTMLElement) {
+    const box = wrap.getBoundingClientRect();
+    for (const span of wrap.querySelectorAll<HTMLElement>('.textLayer span')) {
+      const node = span.firstChild;
+      if (!node || node.nodeType !== Node.TEXT_NODE) continue;
+      for (const m of node.textContent!.matchAll(URL_RE)) {
+        const target = m[0].replace(/[.,;]$/, '');
+        const range = document.createRange();
+        range.setStart(node, m.index!);
+        range.setEnd(node, m.index! + target.length);
+        const r = range.getBoundingClientRect();
+        const link = document.createElement('a');
+        link.href = target.startsWith('http') ? target : `mailto:${target}`;
+        if (target.startsWith('http')) {
+          link.target = '_blank';
+          link.rel = 'noopener';
+        }
+        link.className = 'pdf-link';
+        link.setAttribute('aria-label', target);
+        Object.assign(link.style, {
+          left: `${r.left - box.left}px`,
+          top: `${r.top - box.top}px`,
+          width: `${r.width}px`,
+          height: `${r.height}px`,
+        });
+        wrap.append(link);
+      }
+    }
+  }
+
+  zoomBtns.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      if (!doc) return;
+      zoomIndex = Math.max(0, Math.min(ZOOMS.length - 1, zoomIndex + Number(btn.dataset.zoom)));
+      render();
+    }),
+  );
+
+  let lastWidth = scroller.clientWidth;
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  new ResizeObserver(() => {
+    if (!doc || scroller.clientWidth === lastWidth) return;
+    lastWidth = scroller.clientWidth;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 150);
+  }).observe(scroller);
+
+  // Only fetch pdf.js and the PDF when the viewer is about to scroll into view.
+  const lazy = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        lazy.disconnect();
+        load();
+      }
+    },
+    { rootMargin: '800px 0px' },
+  );
+  lazy.observe(root);
+</script>

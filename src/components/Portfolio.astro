@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import Story from './Story.astro';
+import Traits from './Traits.astro';
+import Resume from './Resume.astro';
+import Contact from './Contact.astro';
+import { t, type Lang } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+<Base lang={lang} copy={copy}>
+  <Nav lang={lang} copy={copy} />
+  <main id="main">
+    <Hero copy={copy} />
+    <Story copy={copy} />
+    <Traits copy={copy} />
+    <Resume copy={copy} />
+    <Contact copy={copy} />
+  </main>
+  <footer class="mx-auto max-w-6xl px-4 md:px-6">
+    <div class="flex flex-wrap justify-between gap-2 border-t border-line py-8 text-sm text-muted">
+      <p>&copy; 2026 Antoine Oparin</p>
+      <p>{copy.footer}</p>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  // Fade sections in as they enter the viewport. CSS hides them only when
+  // html.js is set and motion is allowed, so content never depends on this.
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    },
+    { rootMargin: '0px 0px -12% 0px' },
+  );
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>

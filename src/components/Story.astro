@@ -1,0 +1,124 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import board from '../assets/ramifie-board.webp';
+import { links, type Copy } from '../i18n/content';
+
+interface Props {
+  copy: Copy;
+}
+const { copy } = Astro.props;
+const { heading, chapters } = copy.story;
+const RAMIFIE = 1; // chapter that shows the game
+---
+
+<section id="story" aria-labelledby="story-title" class="mx-auto max-w-6xl px-4 py-24 md:px-6 md:py-32">
+  <h2 id="story-title" class="reveal text-4xl font-semibold tracking-tight md:text-6xl">{heading}</h2>
+
+  <div class="mt-12 lg:mt-4 lg:grid lg:grid-cols-2 lg:gap-16">
+    <!-- Sticky side: the year rolls as each chapter takes focus (large screens only). -->
+    <div class="hidden lg:block" aria-hidden="true">
+      <div class="sticky top-16 flex h-[calc(100dvh-4rem)] flex-col justify-center">
+        <div class="relative h-[11rem] overflow-hidden">
+          {
+            chapters.map((c, i) => (
+              <span
+                data-year={i}
+                data-state={i === 0 ? 'active' : 'after'}
+                class="story-year absolute inset-0 font-semibold tracking-tighter text-[10rem] leading-none"
+              >
+                {c.year}
+              </span>
+            ))
+          }
+        </div>
+        <div class="mt-8 flex gap-2">
+          {chapters.map((_, i) => <span data-step={i} class="story-step h-1 w-10 rounded-full" />)}
+        </div>
+        <div data-visual class="story-visual mt-10 max-w-sm">
+          <Picture
+            src={board}
+            alt=""
+            widths={[360, 540, 720]}
+            sizes="384px"
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            class="aspect-square w-full rounded-3xl bg-[#000]"
+          />
+        </div>
+      </div>
+    </div>
+
+    <ol class="grid">
+      {
+        chapters.map((c, i) => (
+          <li
+            data-chapter={i}
+            class:list={['story-chapter relative pt-12 pl-10 lg:flex lg:min-h-[80dvh] lg:flex-col lg:justify-center lg:p-0', i === chapters.length - 1 && 'pb-4']}
+          >
+            {/* Mobile timeline: a dot per chapter, joined by a line that fills as you scroll. */}
+            <span aria-hidden="true" class="story-node lg:hidden" />
+            {i < chapters.length - 1 && (
+              <span aria-hidden="true" class="story-line lg:hidden">
+                <span class="story-line-fill" />
+              </span>
+            )}
+            <div class="reveal lg:contents">
+            <p class="story-mobile-year text-5xl font-semibold tracking-tighter leading-none lg:hidden">{c.year}</p>
+            <h3 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl lg:mt-0">{c.title}</h3>
+            <p class="mt-4 max-w-[42ch] text-lg leading-relaxed text-muted md:text-xl">{c.body}</p>
+            {i === RAMIFIE && (
+              <>
+                <Picture
+                  src={board}
+                  alt={c.imageAlt ?? ''}
+                  widths={[360, 540, 720]}
+                  sizes="(min-width: 640px) 384px, 90vw"
+                  formats={['avif', 'webp']}
+                  fallbackFormat="webp"
+                  class="mt-8 aspect-square w-full max-w-sm rounded-3xl bg-[#000] lg:hidden"
+                />
+                <a href={links.ramifie} class="mt-6 inline-flex items-center gap-1.5 font-medium link lg:self-start">
+                  {c.link}
+                  <Icon name="arrowUpRight" />
+                </a>
+              </>
+            )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<script>
+  const chapters = document.querySelectorAll<HTMLElement>('[data-chapter]');
+  const years = document.querySelectorAll<HTMLElement>('[data-year]');
+  const steps = document.querySelectorAll<HTMLElement>('[data-step]');
+  const visual = document.querySelector<HTMLElement>('[data-visual]');
+  const RAMIFIE = '1';
+
+  function activate(index: number) {
+    // Large screens: rolling year, step bar, Ramifie visual.
+    years.forEach((y, i) => (y.dataset.state = i === index ? 'active' : i < index ? 'before' : 'after'));
+    steps.forEach((s, i) => s.toggleAttribute('data-done', i <= index));
+    visual?.toggleAttribute('data-show', String(index) === RAMIFIE);
+    // Every chapter: reached ones light their dot, passed ones fill the line below.
+    chapters.forEach((c, i) => {
+      c.toggleAttribute('data-active', i === index);
+      c.toggleAttribute('data-reached', i <= index);
+      c.toggleAttribute('data-done', i < index);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) if (e.isIntersecting) activate(Number((e.target as HTMLElement).dataset.chapter));
+    },
+    { rootMargin: '-50% 0px -50% 0px' },
+  );
+  chapters.forEach((c) => observer.observe(c));
+  // Show the first year on desktop without marking anything reached yet.
+  years.forEach((y, i) => (y.dataset.state = i === 0 ? 'active' : 'after'));
+</script>

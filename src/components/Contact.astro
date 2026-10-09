@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import { links, type Copy } from '../i18n/content';
+
+interface Props {
+  copy: Copy;
+}
+const { copy } = Astro.props;
+const c = copy.contact;
+---
+
+<section id="contact" aria-labelledby="contact-title" class="mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-40">
+  <h2 id="contact-title" class="reveal text-5xl font-semibold tracking-tighter md:text-8xl">{c.heading}</h2>
+  <p class="reveal mt-6 max-w-[44ch] text-lg leading-relaxed text-muted md:text-2xl">{c.body}</p>
+
+  <!-- Email and its copy button share one bar so they never wrap apart on small screens. -->
+  <div
+    class="reveal mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-line bg-surface p-1.5 pl-5 md:pl-7"
+  >
+    <a href={`mailto:${links.email}`} class="min-w-0 flex-1 truncate text-base font-medium hover:text-accent min-[380px]:text-lg md:text-2xl">
+      {links.email}
+    </a>
+    <button type="button" data-copy={links.email} data-copied-label={c.copied} class="btn btn-primary shrink-0 px-3.5 py-2.5 min-[380px]:px-4">
+      <span data-icon="copy"><Icon name="copy" /></span>
+      <span data-icon="done" hidden><Icon name="check" /></span>
+      <span data-label class="max-[379px]:sr-only">{c.copy}</span>
+    </button>
+  </div>
+
+  <ul class="reveal mt-4 grid max-w-xl grid-cols-2 gap-3 sm:flex">
+    <li><a href={links.linkedin} class="btn btn-secondary w-full justify-center sm:w-auto"><Icon name="linkedin" /> LinkedIn</a></li>
+    <li><a href={links.github} class="btn btn-secondary w-full justify-center sm:w-auto"><Icon name="github" /> GitHub</a></li>
+  </ul>
+</section>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-copy]');
+  btn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy ?? '');
+    } catch {
+      return; // Clipboard blocked: the mailto link next to it still works.
+    }
+    const label = btn.querySelector<HTMLElement>('[data-label]')!;
+    const copyIcon = btn.querySelector<HTMLElement>('[data-icon=copy]')!;
+    const doneIcon = btn.querySelector<HTMLElement>('[data-icon=done]')!;
+    const original = label.textContent;
+    label.textContent = btn.dataset.copiedLabel ?? '';
+    copyIcon.hidden = true;
+    doneIcon.hidden = false;
+    setTimeout(() => {
+      label.textContent = original;
+      copyIcon.hidden = false;
+      doneIcon.hidden = true;
+    }, 2000);
+  });
+</script>
