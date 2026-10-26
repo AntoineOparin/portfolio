@@ -1,0 +1,36 @@
+# Antoine Oparin
+
+> Antoine Oparin is a software developer in Montréal and a Computer Science student at Concordia University. He builds real-time, full-stack software with Java, Spring Boot, React and TypeScript, and is open to new opportunities.
+
+- Contact: antoineoparin@gmail.com
+- Location: Montréal, Québec, Canada
+- Languages: Java, TypeScript, JavaScript, C#, Kotlin, SQL (PostgreSQL), NoSQL (MongoDB), HTML, CSS
+- Frameworks and libraries: Spring Boot, React, Node.js, .NET, Tailwind CSS, Flask, Express, Next.js
+- Tools: Git, Docker, GitHub Actions, GitLab CI, Visual Studio, VS Code, Linux, Google Colab
+
+**Experience**
+
+- **TS Imagine**, Software Developer Intern, Fixed Income (Apr - Jul 2026, Montréal): Worked on the Fixed Income Order Execution Management System, moving legacy apps onto the company's Spring Boot and React architecture. Modernized 3 legacy GWT/GXT applications into Spring Boot microservices, owned the Server-Sent Events feature streaming real-time order updates to the React frontend, built 15+ reusable React/TypeScript components adopted by 2+ teams, and turned 40+ migration prompts and workflows into a reusable Claude Code skill.
+
+**Education**
+
+- **Concordia University**, Bachelor of Computer Science (Sep 2026 - May 2029, current)
+- **Dawson College**, DEC in Computer Science Technology (Aug 2023 - May 2026)
+
+## Projects
+
+- [Ramifie](https://ramifie.com): Daily crossword-style word puzzle about building one connected grid of valid words (2025 - present). 50+ recurring players; time-to-playable on 3G cut from 2.5s to 1.9s. React, TypeScript, Tailwind CSS, AWS Lambda, Cloudflare Pages, GitHub Actions.
+- [ToneBridge](https://github.com/AntoineOparin/ToneBridge): Perfect-pitch training game built with a team of 3 at DawsHacks 2026. In-browser pitch detection, a 10-level note curriculum and real-time Socket.io duels with ELO ratings. React, TypeScript, Node.js, Socket.io, PostgreSQL.
+- [Hair Salon Appointments](https://gitlab.com/thomas-k/dw-420w25sec1-prj-grp3-koleboshyna): School project. Full-stack appointment and reporting system for a hair salon. React, Flask, PostgreSQL, Docker, Python, JavaScript.
+- [Fireworks Simulator](https://gitlab.com/dawson-cst-cohort-2026/510/section1/oparin/fireworks): School project. Modular particle-system simulator and reusable rendering libraries for fireworks. C#, .NET 8, MSTest, MonoGame.
+
+## Pages
+
+- [Home](https://antoineoparin.pages.dev/): About, experience, selected work, skills, education and contact
+- [Projects](https://antoineoparin.pages.dev/projects): All projects with descriptions and tech stacks
+- [Resume (PDF)](https://antoineoparin.pages.dev/AntoineOparin_CV.pdf): Full resume, updated Fall 2026
+
+## Optional
+
+- [GitHub](https://github.com/AntoineOparin): Source code and other repositories
+- [LinkedIn](https://www.linkedin.com/in/antoineoparin/): Professional profile

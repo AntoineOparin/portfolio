@@ -4,11 +4,13 @@
   "private": true,
   "description": "Static web developer portfolio for Antoine Oparin",
   "scripts": {
-    "build": "npx @tailwindcss/cli -i ./styles.css -o ./output.css --minify && rm -rf dist && mkdir dist && cp -R index.html projects.html output.css main.js field.js AntoineOparin_CV.pdf assets dist/",
-    "dev": "npx @tailwindcss/cli -i ./styles.css -o ./output.css --watch"
+    "build": "npx @tailwindcss/cli -i ./styles.css -o ./output.css --minify && node scripts/build.mjs",
+    "dev": "npx @tailwindcss/cli -i ./styles.css -o ./output.css --watch",
+    "preview": "npm run build -- --drafts && node scripts/preview.mjs"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
+    "marked": "18.0.14",
     "tailwindcss": "^4.1.18"
   }
 }

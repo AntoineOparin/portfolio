@@ -4,7 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projects | Antoine Oparin</title>
-    <meta name="description" content="Selected projects by Antoine Oparin." />
+    <meta
+      name="description"
+      content="Projects by Antoine Oparin: Ramifie, a daily crossword game; ToneBridge, a real-time pitch-training game built at DawsHacks 2026; a hair salon booking app; and a fireworks simulator."
+    />
+    <link rel="canonical" href="https://antoineoparin.pages.dev/projects" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Antoine Oparin" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:url" content="https://antoineoparin.pages.dev/projects" />
+    <meta property="og:title" content="Projects | Antoine Oparin" />
+    <meta
+      property="og:description"
+      content="Ramifie, ToneBridge and other projects by Antoine Oparin, a software developer in Montréal."
+    />
+    <meta
+      property="og:image"
+      content="https://antoineoparin.pages.dev/assets/antoine-oparin.jpg"
+    />
+    <meta property="og:image:width" content="426" />
+    <meta property="og:image:height" content="519" />
+    <meta property="og:image:alt" content="Portrait of Antoine Oparin" />
+    <meta name="twitter:card" content="summary" />
+    <link
+      rel="ai-catalog"
+      type="application/ai-catalog+json"
+      href="/.well-known/ai-catalog.json"
+    />
     <meta
       name="theme-color"
       content="#090b0e"
@@ -15,15 +41,19 @@
       content="#f2f4f6"
       media="(prefers-color-scheme: light)"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="./assets/fonts/geist-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <link
-      rel="stylesheet"
-      href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
+      rel="preload"
+      href="./assets/fonts/geist-mono-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <link href="./output.css" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="./assets/antoine-oparin-pfp.webp" />
@@ -45,7 +75,7 @@
         aria-label="Primary"
         class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8"
       >
-        <a href="./index.html" class="monogram" aria-label="Antoine Oparin, home">
+        <a href="./index.html" class="monogram" aria-label="AO, Antoine Oparin, home">
           <span aria-hidden="true">A</span><span aria-hidden="true">O</span>
         </a>
         <ul class="hidden items-center gap-1 text-sm md:flex">
@@ -58,6 +88,7 @@
               >Projects</a
             >
           </li>
+          <li data-blog-link><a class="nav-link" href="./blog/">Blog</a></li>
           <li><a class="nav-link" href="./index.html#skills">Skills</a></li>
           <li><a class="nav-link" href="./index.html#contact">Contact</a></li>
         </ul>
@@ -67,7 +98,7 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-ghost h-9 px-4"
-            >Resume <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+            >Resume <svg class="ph ph-arrow-up-right" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg
           ></a>
           <button
             type="button"
@@ -76,7 +107,8 @@
             aria-controls="mobile-menu"
             data-menu-toggle
           >
-            <i class="ph ph-list" aria-hidden="true"></i>
+            <svg class="ph ph-list" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+            <svg class="ph ph-x" aria-hidden="true" hidden viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
             <span class="sr-only">Menu</span>
           </button>
         </div>
@@ -88,6 +120,7 @@
             <a class="block py-2" href="./index.html#experience">Experience</a>
           </li>
           <li><a class="block py-2" href="./projects.html">Projects</a></li>
+          <li data-blog-link><a class="block py-2" href="./blog/">Blog</a></li>
           <li><a class="block py-2" href="./index.html#skills">Skills</a></li>
           <li><a class="block py-2" href="./index.html#contact">Contact</a></li>
         </ul>
@@ -114,8 +147,8 @@
             <span class="line">Projects</span>
           </h1>
           <p
-            class="hero-in mt-8 max-w-[38ch] text-lg leading-relaxed text-muted md:text-xl"
-            style="--d: 800ms"
+            class="hero-in hero-lead mt-8 max-w-[38ch] text-lg leading-relaxed text-muted md:text-xl"
+            style="--d: 150ms"
           >
             From a production puzzle game to hackathon builds and school
             projects.
@@ -162,7 +195,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-primary"
-                >Play <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+                >Play <svg class="ph ph-arrow-up-right" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg
               ></a>
             </div>
           </li>
@@ -201,7 +234,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-ghost"
-                ><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a
+                ><svg class="ph ph-github-logo" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></svg> GitHub</a
               >
             </div>
           </li>
@@ -238,7 +271,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-ghost"
-                ><i class="ph ph-gitlab-logo" aria-hidden="true"></i> GitLab</a
+                ><svg class="ph ph-gitlab-logo" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M230.15,117.1,210.25,41a11.94,11.94,0,0,0-22.79-1.11L169.78,88H86.22L68.54,39.87A11.94,11.94,0,0,0,45.75,41L25.85,117.1a57.19,57.19,0,0,0,22,61l73.27,51.76a11.91,11.91,0,0,0,13.74,0l73.27-51.76A57.19,57.19,0,0,0,230.15,117.1ZM58,57.5,73.13,98.76A8,8,0,0,0,80.64,104h94.72a8,8,0,0,0,7.51-5.24L198,57.5l13.07,50L128,166.21,44.9,107.5ZM40.68,124.11,114.13,176,93.41,190.65,57.09,165A41.06,41.06,0,0,1,40.68,124.11Zm87.32,91-20.73-14.65L128,185.8l20.73,14.64ZM198.91,165l-36.32,25.66L141.87,176l73.45-51.9A41.06,41.06,0,0,1,198.91,165Z"/></svg> GitLab</a
               >
             </div>
           </li>
@@ -274,7 +307,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-ghost"
-                ><i class="ph ph-gitlab-logo" aria-hidden="true"></i> GitLab</a
+                ><svg class="ph ph-gitlab-logo" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M230.15,117.1,210.25,41a11.94,11.94,0,0,0-22.79-1.11L169.78,88H86.22L68.54,39.87A11.94,11.94,0,0,0,45.75,41L25.85,117.1a57.19,57.19,0,0,0,22,61l73.27,51.76a11.91,11.91,0,0,0,13.74,0l73.27-51.76A57.19,57.19,0,0,0,230.15,117.1ZM58,57.5,73.13,98.76A8,8,0,0,0,80.64,104h94.72a8,8,0,0,0,7.51-5.24L198,57.5l13.07,50L128,166.21,44.9,107.5ZM40.68,124.11,114.13,176,93.41,190.65,57.09,165A41.06,41.06,0,0,1,40.68,124.11Zm87.32,91-20.73-14.65L128,185.8l20.73,14.64ZM198.91,165l-36.32,25.66L141.87,176l73.45-51.9A41.06,41.06,0,0,1,198.91,165Z"/></svg> GitLab</a
               >
             </div>
           </li>
@@ -287,7 +320,7 @@
     >
       <p>© <span data-year></span> Antoine Oparin</p>
       <a href="./index.html" class="transition-colors hover:text-fg"
-        >Back to home <i class="ph ph-arrow-left" aria-hidden="true"></i
+        >Back to home <svg class="ph ph-arrow-left" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></svg
       ></a>
     </footer>
   </body>

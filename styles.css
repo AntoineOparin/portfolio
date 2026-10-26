@@ -1,5 +1,22 @@
 @import 'tailwindcss';
 
+/* Self-hosted Geist variable fonts (Latin subset, from Fontsource) */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/geist-latin-wght-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
+}
+
 /*
   Shape system: interactive elements (buttons, chips) are full pills,
   cards are 18px, grid tiles and keys are 6px.
@@ -61,11 +78,47 @@
   }
 
   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Main grows so the footer sits at the bottom of short pages. Both need an
+     explicit width because auto margins shrink flex items to their content. */
+  body > main {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+
+  body > footer {
+    width: 100%;
+  }
+
+  /* Tailwind's reset gives buttons the default arrow cursor. */
+  button:not(:disabled),
+  [role='button'],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+
+  /* Inline Phosphor icons, sized like the glyphs of the icon font */
+  .ph {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    vertical-align: -0.125em;
   }
 
   ::selection {
@@ -108,7 +161,7 @@ body::after {
     @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium whitespace-nowrap transition duration-300 ease-out active:scale-[0.97];
   }
 
-  .btn i {
+  .btn .ph {
     @apply text-base transition-transform duration-300 ease-out;
   }
 
@@ -283,6 +336,13 @@ body::after {
   animation-delay: var(--d, 0ms);
 }
 
+/* The hero lead is the page's largest element. Chrome only counts an element
+   that fades in from transparent once its fade ends, so the lead slides in
+   without fading to keep Largest Contentful Paint early. */
+.js .hero-lead {
+  animation-name: rise;
+}
+
 .js .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -312,10 +372,24 @@ body::after {
   }
 }
 
+@keyframes rise {
+  from {
+    transform: translateY(18px);
+  }
+}
+
 /* About statement, lit word by word as it scrolls through the viewport */
 .statement {
   @apply text-3xl leading-[1.15] font-medium tracking-[-0.03em] md:text-5xl;
   text-wrap: pretty;
+  /* Unlit words stay at 3:1 contrast, the minimum for text this size. */
+  --word-dim: 0.37;
+}
+
+@media (prefers-color-scheme: light) {
+  .statement {
+    --word-dim: 0.46;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -333,7 +407,7 @@ body::after {
 
 @keyframes word-lit {
   from {
-    opacity: 0.14;
+    opacity: var(--word-dim);
   }
 }
 
@@ -669,5 +743,145 @@ body::after {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Blog post body, rendered from Markdown */
+@layer components {
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    overflow-wrap: break-word;
+  }
+
+  .prose > * + * {
+    margin-top: 1.25em;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    scroll-margin-top: 6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .prose h2 {
+    margin-top: 2.25em;
+    font-size: 1.75rem;
+    letter-spacing: -0.03em;
+  }
+
+  .prose h3 {
+    margin-top: 1.8em;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .prose h4 {
+    margin-top: 1.6em;
+    font-size: 1.0625rem;
+  }
+
+  .prose :is(h2, h3, h4) + * {
+    margin-top: 0.75em;
+  }
+
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .prose a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .prose strong {
+    font-weight: 600;
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+
+  .prose ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+
+  .prose li + li,
+  .prose li > :is(ul, ol) {
+    margin-top: 0.4em;
+  }
+
+  .prose li::marker {
+    color: var(--muted);
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.2em;
+    color: var(--muted);
+  }
+
+  .prose code {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--raised);
+    padding: 0.1em 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  .prose pre {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--raised);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .prose pre code {
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .prose img {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+
+  .prose hr {
+    margin: 3em 0;
+    border-color: var(--line);
+  }
+
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.9375em;
+  }
+
+  .prose :is(th, td) {
+    border-bottom: 1px solid var(--line);
+    padding: 0.6em 0.9em;
+    text-align: left;
+  }
+
+  .prose th {
+    font-weight: 600;
   }
 }

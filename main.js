@@ -25,7 +25,8 @@
     const setOpen = (open) => {
       menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.querySelector('i').className = open ? 'ph ph-x' : 'ph ph-list';
+      toggle.querySelector('.ph-list').hidden = open;
+      toggle.querySelector('.ph-x').hidden = !open;
       nav.classList.toggle('is-open', open);
     };
     toggle.addEventListener('click', () => setOpen(menu.hidden));
@@ -145,7 +146,8 @@
   }
 
   document.querySelectorAll('[data-copy]').forEach((button) => {
-    const icon = button.querySelector('i');
+    const copyIcon = button.querySelector('.ph-copy');
+    const checkIcon = button.querySelector('.ph-check');
     const label = button.querySelector('span');
     const original = label.textContent;
     let timer = 0;
@@ -157,11 +159,13 @@
         return;
       }
       label.textContent = 'Copied';
-      icon.className = 'ph ph-check';
+      copyIcon.hidden = true;
+      checkIcon.hidden = false;
       clearTimeout(timer);
       timer = setTimeout(() => {
         label.textContent = original;
-        icon.className = 'ph ph-copy';
+        copyIcon.hidden = false;
+        checkIcon.hidden = true;
       }, 2000);
     });
   });
