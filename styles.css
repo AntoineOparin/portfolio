@@ -78,11 +78,38 @@
   }
 
   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Main grows so the footer sits at the bottom of short pages. Both need an
+     explicit width because auto margins shrink flex items to their content. */
+  body > main {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+
+  body > footer {
+    width: 100%;
+  }
+
+  /* Tailwind's reset gives buttons the default arrow cursor. */
+  button:not(:disabled),
+  [role='button'],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: not-allowed;
   }
 
   /* Inline Phosphor icons, sized like the glyphs of the icon font */
@@ -695,5 +722,145 @@ body::after {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Blog post body, rendered from Markdown */
+@layer components {
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    overflow-wrap: break-word;
+  }
+
+  .prose > * + * {
+    margin-top: 1.25em;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    scroll-margin-top: 6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .prose h2 {
+    margin-top: 2.25em;
+    font-size: 1.75rem;
+    letter-spacing: -0.03em;
+  }
+
+  .prose h3 {
+    margin-top: 1.8em;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .prose h4 {
+    margin-top: 1.6em;
+    font-size: 1.0625rem;
+  }
+
+  .prose :is(h2, h3, h4) + * {
+    margin-top: 0.75em;
+  }
+
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .prose a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .prose strong {
+    font-weight: 600;
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+
+  .prose ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+
+  .prose li + li,
+  .prose li > :is(ul, ol) {
+    margin-top: 0.4em;
+  }
+
+  .prose li::marker {
+    color: var(--muted);
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.2em;
+    color: var(--muted);
+  }
+
+  .prose code {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--raised);
+    padding: 0.1em 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  .prose pre {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--raised);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .prose pre code {
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .prose img {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+
+  .prose hr {
+    margin: 3em 0;
+    border-color: var(--line);
+  }
+
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.9375em;
+  }
+
+  .prose :is(th, td) {
+    border-bottom: 1px solid var(--line);
+    padding: 0.6em 0.9em;
+    text-align: left;
+  }
+
+  .prose th {
+    font-weight: 600;
   }
 }
