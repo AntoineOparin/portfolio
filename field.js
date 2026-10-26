@@ -16,6 +16,7 @@
   const REACH = 200;
   const RIPPLE_SPEED = 0.85;
   const RIPPLE_BAND = 70;
+  const AMBIENT_FRAME = 1000 / 30;
 
   let width = 0;
   let height = 0;
@@ -33,6 +34,9 @@
   let nextSolve = 0;
   let lastSolved = -1;
   let raf = 0;
+  let lastFrame = 0;
+  let settling = false;
+  let started = false;
   let inView = true;
   let colors = {};
   const pointer = { x: 0, y: 0, active: false };
@@ -172,10 +176,9 @@
     nextSolve = 1900 + entries.length * 120;
   }
 
-  function layout() {
-    const rect = host.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
+  function layout(w, h) {
+    width = w;
+    height = h;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
@@ -224,8 +227,23 @@
     return n * n * n;
   }
 
+  const loop = () => {
+    if (!reduceMotion && inView && !document.hidden) {
+      raf = requestAnimationFrame(frame);
+    }
+  };
+
   function frame(now) {
     raf = 0;
+    // The ambient drift is slow enough for 30fps; the pointer, ripples and
+    // tiles settling after the pointer leaves get every frame.
+    const interactive = pointer.active || ripples.length || settling;
+    if (!reduceMotion && !interactive && now - lastFrame < AMBIENT_FRAME - 1) {
+      loop();
+      return;
+    }
+    lastFrame = now;
+    settling = false;
     const t = reduceMotion ? 1e5 : now - origin;
 
     if (!reduceMotion && entries.length && t > nextSolve) {
@@ -268,6 +286,7 @@
           pointer.active && dist < REACH ? (1 - dist / REACH) ** 2 : 0;
         lift[idx] += (target - lift[idx]) * 0.14;
         const L = lift[idx];
+        if (L > 0.005) settling = true;
 
         let wave = 0;
         for (const ripple of ripples) {
@@ -337,19 +356,24 @@
     }
     ctx.globalAlpha = 1;
 
-    if (!reduceMotion && inView && !document.hidden) {
-      raf = requestAnimationFrame(frame);
-    }
+    loop();
   }
 
   function draw() {
+    if (!started || !width) return;
     if (reduceMotion) frame(0);
     else if (!raf) raf = requestAnimationFrame(frame);
   }
 
-  readColors();
-  layout();
-  draw();
+  // Hold the intro until the page has loaded so it doesn't compete with the
+  // first render.
+  function start() {
+    started = true;
+    origin = performance.now();
+    draw();
+  }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
   document.fonts?.ready.then(() => reduceMotion && draw());
 
   window
@@ -359,13 +383,21 @@
       draw();
     });
 
+  // The observer's first callback does the initial layout, using the size the
+  // browser already computed instead of forcing a reflow on load.
   let resizeTimer = 0;
-  new ResizeObserver(() => {
-    const rect = host.getBoundingClientRect();
-    if (rect.width === width && rect.height === height) return;
+  new ResizeObserver(([entry]) => {
+    const { width: w, height: h } = entry.contentRect;
+    if (w === width && h === height) return;
+    if (!width) {
+      readColors();
+      layout(w, h);
+      draw();
+      return;
+    }
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      layout();
+      layout(w, h);
       draw();
     }, 150);
   }).observe(host);

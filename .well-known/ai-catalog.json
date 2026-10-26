@@ -1,0 +1,29 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Antoine Oparin",
+    "identifier": "antoineoparin.pages.dev",
+    "documentationUrl": "https://antoineoparin.pages.dev/",
+    "logoUrl": "https://antoineoparin.pages.dev/assets/antoine-oparin.jpg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:antoineoparin.pages.dev:docs:llms-txt",
+      "type": "text/markdown",
+      "url": "https://antoineoparin.pages.dev/llms.txt",
+      "displayName": "Antoine Oparin: profile for language models",
+      "description": "Summary of Antoine Oparin's experience, education, projects and skills, with links to the site, resume, GitHub and LinkedIn.",
+      "tags": ["portfolio", "resume", "software-developer", "llms-txt"],
+      "updatedAt": "2026-10-26T00:00:00Z"
+    },
+    {
+      "identifier": "urn:air:antoineoparin.pages.dev:docs:resume",
+      "type": "application/pdf",
+      "url": "https://antoineoparin.pages.dev/AntoineOparin_CV.pdf",
+      "displayName": "Antoine Oparin: resume",
+      "description": "Antoine Oparin's resume, updated Fall 2026.",
+      "tags": ["resume", "cv"],
+      "updatedAt": "2026-10-26T00:00:00Z"
+    }
+  ]
+}
