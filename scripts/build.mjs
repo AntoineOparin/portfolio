@@ -17,7 +17,6 @@ const STATIC = [
   'llms.txt',
   '_headers',
   '.well-known',
-  'output.css',
   'main.js',
   'field.js',
   'AntoineOparin_CV.pdf',
@@ -190,7 +189,7 @@ ${head}
         aria-label="Primary"
         class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8"
       >
-        <a href="/" class="monogram" aria-label="Antoine Oparin, home">
+        <a href="/" class="monogram" aria-label="AO, Antoine Oparin, home">
           <span aria-hidden="true">A</span><span aria-hidden="true">O</span>
         </a>
         <ul class="hidden items-center gap-1 text-sm md:flex">
@@ -417,6 +416,18 @@ if (posts.length) {
   for (const file of ['index.html', 'projects.html']) {
     edit(file, (html) => html.replace(/\s*<li[^>]*data-blog-link[^>]*>[\s\S]*?<\/li>/g, ''));
   }
+}
+
+// Inline the stylesheet into every page so the first render doesn't wait on
+// a separate CSS request.
+const css = fs.readFileSync('output.css', 'utf8').replace(/<\/style/gi, '<\\/style');
+const stylesheet = /<link href="\.?\/output\.css" rel="stylesheet" \/>/;
+for (const file of fs.readdirSync(OUT, { recursive: true })) {
+  if (!file.endsWith('.html')) continue;
+  edit(file, (html) => {
+    if (!stylesheet.test(html)) throw new Error(`${file}: stylesheet link not found`);
+    return html.replace(stylesheet, () => `<style>${css}</style>`);
+  });
 }
 
 console.log(

@@ -6,7 +6,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('./assets/fonts/geist-latin-wght-normal.woff2') format('woff2');
+  src: url('/assets/fonts/geist-latin-wght-normal.woff2') format('woff2');
 }
 
 @font-face {
@@ -14,7 +14,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('./assets/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
+  src: url('/assets/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
 }
 
 /*
@@ -336,6 +336,13 @@ body::after {
   animation-delay: var(--d, 0ms);
 }
 
+/* The hero lead is the page's largest element. Chrome only counts an element
+   that fades in from transparent once its fade ends, so the lead slides in
+   without fading to keep Largest Contentful Paint early. */
+.js .hero-lead {
+  animation-name: rise;
+}
+
 .js .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -365,10 +372,24 @@ body::after {
   }
 }
 
+@keyframes rise {
+  from {
+    transform: translateY(18px);
+  }
+}
+
 /* About statement, lit word by word as it scrolls through the viewport */
 .statement {
   @apply text-3xl leading-[1.15] font-medium tracking-[-0.03em] md:text-5xl;
   text-wrap: pretty;
+  /* Unlit words stay at 3:1 contrast, the minimum for text this size. */
+  --word-dim: 0.37;
+}
+
+@media (prefers-color-scheme: light) {
+  .statement {
+    --word-dim: 0.46;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -386,7 +407,7 @@ body::after {
 
 @keyframes word-lit {
   from {
-    opacity: 0.14;
+    opacity: var(--word-dim);
   }
 }
 
