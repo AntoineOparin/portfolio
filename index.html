@@ -3,341 +3,587 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Antoine Oparin — Portfolio</title>
+    <title>Antoine Oparin | Software Developer</title>
+    <meta
+      name="description"
+      content="Antoine Oparin is a Computer Science student at Concordia University in Montréal, building real-time, full-stack software with React, TypeScript and Spring Boot."
+    />
+    <meta property="og:title" content="Antoine Oparin | Software Developer" />
+    <meta
+      property="og:description"
+      content="Computer Science student at Concordia. Real-time, full-stack software with React, TypeScript and Spring Boot."
+    />
+    <meta property="og:image" content="./assets/antoine-oparin-pfp.webp" />
+    <meta
+      name="theme-color"
+      content="#090b0e"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f2f4f6"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
     <link href="./output.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="./assets/antoine-oparin-pfp.webp" />
+    <link rel="icon" type="image/webp" href="./assets/antoine-oparin-pfp.webp" />
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+    <script src="./main.js" defer></script>
+    <script src="./field.js" defer></script>
   </head>
-  <body class="bg-[#30343B] text-white">
+  <body>
     <a
-      href="#home"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-[#2f373b] text-[#8EDEEA] px-3 py-2 rounded-md"
+      href="#main"
+      class="sr-only rounded-full bg-raised px-4 py-2 text-fg focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"
       >Skip to content</a
     >
 
-    <div class="mx-auto max-w-6xl px-3">
-      <header class="py-8 flex items-center gap-8">
-        <img
-          class="w-28 h-28 rounded-full ring-4 ring-[#2f373b] object-cover"
-          src="./assets/antoine-oparin-pfp.webp"
-          alt="Portrait of Antoine Oparin"
-          width="112"
-          height="112"
-        />
-        <div class="leading-tight">
-          <p class="text-sm text-[#8EDEEA]">
-            Computer Science Student / Aspiring Full-Stack Developer
-          </p>
-          <p class="text-4xl my-2 font-extrabold text-[#00C2D9] name">
-            Antoine Oparin
-          </p>
-          <p class="text-sm text-[#45bcd4]">
-            TypeScript, JavaScript, React, Node.js and more
-          </p>
-        </div>
-      </header>
-
-      <nav aria-label="Primary" class="sticky top-0 z-10 bg-[#30343B]">
-        <hr class="text-[#93A4AE]" />
-        <ul class="text-[#8EDEEA] flex flex-wrap gap-2 list-none my-1.5">
-          <li>
-            <a class="hover:bg-gray-500 rounded-md px-2 py-1" href="#home"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a class="hover:bg-gray-500 rounded-md px-2 py-1" href="#about"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              class="hover:bg-gray-500 rounded-md px-2 py-1"
-              href="./projects.html"
-              >Projects</a
-            >
-          </li>
-          <li>
-            <a class="hover:bg-gray-500 rounded-md px-2 py-1" href="#resume"
-              >Resume</a
-            >
-          </li>
-          <li>
-            <a class="hover:bg-gray-500 rounded-md px-2 py-1" href="#skills"
-              >Skills</a
-            >
-          </li>
-          <li>
-            <a class="hover:bg-gray-500 rounded-md px-2 py-1" href="#contact"
-              >Contact</a
-            >
-          </li>
+    <header class="site-nav" data-nav>
+      <nav
+        aria-label="Primary"
+        class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8"
+      >
+        <a href="#home" class="monogram" aria-label="Antoine Oparin, home">
+          <span aria-hidden="true">A</span><span aria-hidden="true">O</span>
+        </a>
+        <ul class="hidden items-center gap-1 text-sm md:flex">
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#experience">Experience</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
-        <hr class="text-[#93A4AE]" />
-      </nav>
-
-      <main id="home" class="mt-6 space-y-12">
-        <!-- Hero -->
-        <section aria-label="Intro">
-          <p class="text-[#93A4AE]">
-            <span class="text-green-500 text-2xl">•</span>
-            Montreal, Canada • Open to opportunities
-          </p>
-          <h1
-            class="text-[#4198F4] font-extrabold leading-tight text-5xl md:text-6xl mt-2"
+        <div class="flex items-center gap-2">
+          <a
+            href="./AntoineOparin_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost h-9 px-4"
+            >Resume <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+          ></a>
+          <button
+            type="button"
+            class="btn btn-ghost h-9 w-9 px-0 md:hidden"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            data-menu-toggle
           >
-            I <span class="text-[#4C8F3E]">design</span>,
-            <span class="text-[#4C8F3E]">build</span>, and
-            <span class="text-[#4C8F3E]">ship</span> performant software.
-          </h1>
-          <p class="text-[#8EDEEA] mt-4 text-xl max-w-3xl">
-            Hands-on experience delivering production-ready software, from
-            architecture and development to deployment.
+            <i class="ph ph-list" aria-hidden="true"></i>
+            <span class="sr-only">Menu</span>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="border-t border-line md:hidden" hidden>
+        <ul class="flex flex-col px-4 py-4 text-2xl font-medium tracking-tight">
+          <li><a class="block py-2" href="#about">About</a></li>
+          <li><a class="block py-2" href="#experience">Experience</a></li>
+          <li><a class="block py-2" href="#projects">Projects</a></li>
+          <li><a class="block py-2" href="#skills">Skills</a></li>
+          <li><a class="block py-2" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section id="home" class="hero" aria-label="Intro">
+        <canvas
+          data-field
+          data-words="TYPESCRIPT REACT SPRING JAVA DOCKER RAMIFIE TONEBRIDGE NODE KOTLIN SOCKET LAMBDA POSTGRES MONTREAL CSHARP EXPRESS NEXTJS FLASK GIT SSE MONGODB LINUX DOTNET MARIADB TAILWIND"
+          aria-hidden="true"
+        ></canvas>
+        <div class="hero-veil" aria-hidden="true"></div>
+
+        <div
+          class="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pt-24 pb-14 md:px-8 md:pb-20"
+        >
+          <p
+            class="hero-in font-mono text-xs tracking-[0.2em] text-muted uppercase"
+            style="--d: 150ms"
+          >
+            Software developer in Montréal
           </p>
-
-          <ul class="flex flex-wrap gap-3 list-none mt-6">
-            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-              TypeScript
-            </li>
-            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-              JavaScript
-            </li>
-            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-              React
-            </li>
-            <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-              Node.js
-            </li>
-          </ul>
-
-          <div class="mt-6 flex flex-wrap gap-3">
+          <h1 class="hero-name mt-5" data-split aria-label="Antoine Oparin">
+            <span class="line">Antoine</span>
+            <span class="line">Oparin</span>
+          </h1>
+          <p
+            class="hero-in mt-8 max-w-[34rem] text-lg leading-relaxed text-muted md:text-xl"
+            style="--d: 1100ms"
+          >
+            Computer Science student at Concordia. I build real-time, full-stack
+            software, most recently for a fixed-income trading platform at TS
+            Imagine.
+          </p>
+          <div class="hero-in mt-9 flex flex-wrap gap-3" style="--d: 1250ms">
+            <a href="#projects" class="btn btn-primary"
+              >See my work <i class="ph ph-arrow-down" aria-hidden="true"></i
+            ></a>
             <a
               href="./AntoineOparin_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-primary"
-            >
-              View Resume
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-4 h-4"
-                aria-hidden="true"
-              >
-                <path d="M14 3h7v7" />
-                <path d="M21 3 10 14" />
-                <path d="M5 7v12a2 2 0 0 0 2 2h12" />
-              </svg>
-            </a>
+              class="btn btn-ghost"
+              >Resume <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+            ></a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- About -->
-        <section id="about" aria-label="About" class="space-y-3">
-          <h2 class="text-2xl font-extrabold text-[#00C2D9]">About</h2>
-          <p class="text-[#93A4AE] max-w-3xl">
-            I'm a Computer Science student at Dawson College focused on building
-            reliable, user-friendly web applications.
-          </p>
-        </section>
+      <!-- About -->
+      <section id="about" class="section" aria-labelledby="about-title">
+        <div class="grid items-center gap-12 md:grid-cols-12 md:gap-16">
+          <figure class="reveal md:col-span-4">
+            <div class="tilt portrait card max-w-sm" data-tilt>
+              <img
+                src="./assets/antoine-oparin-pfp.webp"
+                alt="Portrait of Antoine Oparin"
+                width="426"
+                height="519"
+                loading="lazy"
+                class="aspect-[426/519] w-full object-cover"
+              />
+            </div>
+          </figure>
+          <div class="md:col-span-8">
+            <h2 id="about-title" class="mb-8 text-sm text-muted">About</h2>
+            <p class="statement" data-words>
+              I'm Antoine, a Computer Science student at Concordia University. I
+              build software people come back to: a daily crossword with 50+
+              recurring players, a real-time pitch-training game, and live order
+              streaming for a fixed-income trading system.
+            </p>
+            <p class="reveal mt-10 max-w-[60ch] leading-relaxed text-muted">
+              Before Concordia I completed a DEC in Computer Science Technology at
+              Dawson College. I'm open to new opportunities.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <!-- Projects -->
-        <section id="projects" aria-label="Featured Projects" class="space-y-5">
-          <h2 class="text-2xl font-extrabold text-[#00C2D9]">
-            Featured Projects
-          </h2>
+      <!-- Experience -->
+      <section id="experience" class="section" aria-labelledby="exp-title">
+        <h2 id="exp-title" class="h2 reveal">Experience</h2>
 
-          <article
-            class="rounded-lg border border-gray-700/50 bg-[#2f373b] p-5 flex flex-col md:flex-row gap-5"
-          >
-            <img
-              src="./assets/ramifie-logo.svg"
-              alt="Ramifie project logo"
-              class="w-20 h-20"
-              width="80"
-              height="80"
-            />
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-[#8EDEEA]">Ramifie</h3>
-              <p class="text-[#93A4AE] mt-1">
-                A daily crossword-style word puzzle about building one connected
-                grid of valid words.
+        <article
+          class="card spot reveal mt-12 grid gap-10 p-6 md:mt-16 md:grid-cols-12 md:p-10"
+        >
+          <div class="flex flex-col md:col-span-5">
+            <p class="font-mono text-sm text-muted">Apr - Jul 2026, Montréal</p>
+            <h3
+              class="mt-4 text-4xl font-semibold tracking-[-0.04em] md:text-5xl"
+            >
+              TS Imagine
+            </h3>
+            <p class="mt-2 text-lg text-muted">
+              Software Developer Intern, Fixed Income
+            </p>
+            <p class="mt-6 max-w-[48ch] leading-relaxed text-muted">
+              Worked on the Fixed Income Order Execution Management System,
+              moving legacy apps onto the company's modern Spring Boot and React
+              architecture.
+            </p>
+            <ul class="mt-auto flex flex-wrap gap-2 pt-8">
+              <li class="chip">Spring Boot</li>
+              <li class="chip">React</li>
+              <li class="chip">TypeScript</li>
+              <li class="chip">MariaDB</li>
+              <li class="chip">Docker</li>
+              <li class="chip">TeamCity</li>
+            </ul>
+          </div>
+
+          <div class="stat-grid grid sm:grid-cols-2 md:col-span-7">
+            <div class="flex flex-col gap-4 p-6 md:p-8">
+              <p class="stat-num" data-count="3">3</p>
+              <p class="mt-auto text-sm leading-relaxed text-muted">
+                legacy GWT/GXT applications modernized into Spring Boot
+                microservices
               </p>
-              <ul class="flex flex-wrap gap-2 mt-3">
-                <li class="bg-[#30343B] text-[#93A4AE] rounded-full px-3 py-1">
-                  TypeScript
-                </li>
-                <li class="bg-[#30343B] text-[#93A4AE] rounded-full px-3 py-1">
-                  React
-                </li>
-                <li class="bg-[#30343B] text-[#93A4AE] rounded-full px-3 py-1">
-                  Node.js
-                </li>
-                <li class="bg-[#30343B] text-[#93A4AE] rounded-full px-3 py-1">
-                  Tailwind CSS
-                </li>
-              </ul>
-              <div class="mt-4 flex gap-3">
+            </div>
+            <div class="flex flex-col gap-4 p-6 md:p-8">
+              <p class="stat-num text-accent">SSE</p>
+              <p class="mt-auto text-sm leading-relaxed text-muted">
+                Owned the Server-Sent Events feature streaming real-time order
+                updates to the React frontend
+              </p>
+            </div>
+            <div class="flex flex-col gap-4 p-6 md:p-8">
+              <p class="stat-num" data-count="15" data-suffix="+">15+</p>
+              <p class="mt-auto text-sm leading-relaxed text-muted">
+                reusable React/TypeScript components, adopted by 2+ teams
+              </p>
+            </div>
+            <div class="flex flex-col gap-4 p-6 md:p-8">
+              <p class="stat-num" data-count="40" data-suffix="+">40+</p>
+              <p class="mt-auto text-sm leading-relaxed text-muted">
+                migration prompts and workflows turned into a reusable Claude
+                Code skill for future migrations
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="section" aria-labelledby="projects-title">
+        <h2 id="projects-title" class="h2 reveal">Selected work</h2>
+
+        <div class="mt-12 grid gap-4 md:mt-16 md:grid-cols-12">
+          <!-- Ramifie -->
+          <article class="ramifie card spot reveal md:col-span-7">
+            <div class="flex h-full flex-col p-6 md:p-10">
+              <div class="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-3xl font-semibold tracking-[-0.03em]">
+                    Ramifie
+                  </h3>
+                  <p class="mt-1 font-mono text-sm text-muted">
+                    Daily crossword web app, 2025 - present
+                  </p>
+                </div>
                 <a
                   href="https://ramifie.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="rounded-md bg-[#4198F4] text-[#0b1220] font-semibold px-4 py-2 hover:opacity-90"
-                  >Try Now!</a
-                >
+                  class="btn btn-primary"
+                  >Play Ramifie
+                  <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+                ></a>
               </div>
+
+              <div class="ramifie-art grid place-items-center py-10 md:py-14">
+                <img
+                  src="./assets/ramifie-logo.svg"
+                  alt="Ramifie logo, a grid of crossword tiles"
+                  width="492"
+                  height="492"
+                  loading="lazy"
+                  class="w-40 md:w-52"
+                />
+              </div>
+
+              <div class="mt-auto grid grid-cols-2 gap-6 border-t border-line pt-6">
+                <div>
+                  <p class="text-3xl font-semibold tracking-[-0.04em]">
+                    <span data-count="50" data-suffix="+">50+</span>
+                  </p>
+                  <p class="mt-1 text-sm text-muted">recurring players</p>
+                </div>
+                <div>
+                  <p class="text-3xl font-semibold tracking-[-0.04em]">
+                    2.5s <span class="text-muted">→</span> 1.9s
+                  </p>
+                  <p class="mt-1 text-sm text-muted">
+                    time-to-playable on 3G
+                  </p>
+                </div>
+              </div>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                Puzzles served by a serverless AWS Lambda, deployed with
+                Cloudflare Pages and GitHub Actions.
+              </p>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                <li class="chip">React</li>
+                <li class="chip">TypeScript</li>
+                <li class="chip">Tailwind CSS</li>
+                <li class="chip">AWS Lambda</li>
+                <li class="chip">Cloudflare Pages</li>
+              </ul>
             </div>
           </article>
 
-          <div class="pt-2">
-            <a
-              href="./projects.html"
-              class="text-[#8EDEEA] hover:underline"
-              aria-label="View more projects"
-              >View More Projects</a
-            >
-          </div>
-        </section>
+          <!-- ToneBridge -->
+          <article class="card spot reveal md:col-span-5" style="--d: 100ms">
+            <div class="flex h-full flex-col p-6 md:p-10">
+              <div class="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-3xl font-semibold tracking-[-0.03em]">
+                    ToneBridge
+                  </h3>
+                  <p class="mt-1 font-mono text-sm text-muted">
+                    Perfect-pitch game, DawsHacks 2026
+                  </p>
+                </div>
+                <a
+                  href="https://github.com/AntoineOparin/ToneBridge"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-ghost"
+                  ><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a
+                >
+              </div>
 
-        <!-- Resume -->
-        <section id="resume" aria-label="Resume" class="space-y-3">
-          <h2 class="text-2xl font-extrabold text-[#00C2D9]">Resume</h2>
-          <p class="text-[#93A4AE]">You can view or download my CV below.</p>
+              <div class="mt-10">
+                <p class="flex items-baseline justify-between" aria-live="polite">
+                  <span
+                    class="text-2xl font-semibold tracking-tight text-muted"
+                    data-note
+                    >Play a note</span
+                  >
+                  <span class="font-mono text-sm text-muted" data-hz></span>
+                </p>
+                <div
+                  class="piano mt-4"
+                  data-piano
+                  role="group"
+                  aria-label="One-octave piano keyboard"
+                >
+                  <button type="button" class="key-white" data-freq="261.63" data-note="C4">C</button>
+                  <button type="button" class="key-white" data-freq="293.66" data-note="D4">D</button>
+                  <button type="button" class="key-white" data-freq="329.63" data-note="E4">E</button>
+                  <button type="button" class="key-white" data-freq="349.23" data-note="F4">F</button>
+                  <button type="button" class="key-white" data-freq="392" data-note="G4">G</button>
+                  <button type="button" class="key-white" data-freq="440" data-note="A4">A</button>
+                  <button type="button" class="key-white" data-freq="493.88" data-note="B4">B</button>
+                  <button type="button" class="key-white" data-freq="523.25" data-note="C5">C</button>
+                  <button type="button" class="key-black" style="--k: 1" data-freq="277.18" data-note="C♯4" aria-label="C sharp"></button>
+                  <button type="button" class="key-black" style="--k: 2" data-freq="311.13" data-note="D♯4" aria-label="D sharp"></button>
+                  <button type="button" class="key-black" style="--k: 4" data-freq="369.99" data-note="F♯4" aria-label="F sharp"></button>
+                  <button type="button" class="key-black" style="--k: 5" data-freq="415.3" data-note="G♯4" aria-label="G sharp"></button>
+                  <button type="button" class="key-black" style="--k: 6" data-freq="466.16" data-note="A♯4" aria-label="A sharp"></button>
+                </div>
+              </div>
+
+              <p class="mt-8 text-sm leading-relaxed text-muted">
+                Built with a team of 3: in-browser pitch detection, a 10-level
+                note curriculum, and real-time Socket.io duels with ELO ratings.
+              </p>
+              <ul class="mt-auto flex flex-wrap gap-2 pt-6">
+                <li class="chip">React</li>
+                <li class="chip">TypeScript</li>
+                <li class="chip">Node.js</li>
+                <li class="chip">Socket.io</li>
+                <li class="chip">PostgreSQL</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- More projects -->
+          <a
+            href="./projects.html"
+            class="group card spot reveal flex flex-col justify-between gap-8 p-6 md:col-span-12 md:flex-row md:items-center md:p-10"
+          >
+            <div class="flex items-center gap-6">
+              <div class="flex-none flip-tiles flex gap-1.5" aria-hidden="true">
+                <span class="tile h-11 w-11 text-base" style="--i: 0"><span class="transition-transform">H</span></span>
+                <span class="tile h-11 w-11 text-base" style="--i: 1"><span class="transition-transform">F</span></span>
+                <span class="tile h-11 w-11 text-base" style="--i: 2"><span class="transition-transform">+</span></span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-semibold tracking-[-0.03em] md:text-3xl">
+                  More projects
+                </h3>
+                <p class="mt-1 text-muted">
+                  A hair salon booking system, a C# fireworks simulator, and
+                  more.
+                </p>
+              </div>
+            </div>
+            <span class="btn btn-ghost self-start md:self-auto"
+              >All projects <i class="ph ph-arrow-right" aria-hidden="true"></i
+            ></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="py-20 md:py-28" aria-labelledby="skills-title">
+        <div class="mx-auto max-w-7xl px-4 md:px-8">
+          <h2 id="skills-title" class="h2 reveal">Skills</h2>
+        </div>
+
+        <div class="marquee mt-12 md:mt-16" aria-hidden="true">
+          <div class="marquee-track">
+            <span class="marquee-item">Java</span>
+            <span class="marquee-item">TypeScript</span>
+            <span class="marquee-item">React</span>
+            <span class="marquee-item">Spring Boot</span>
+            <span class="marquee-item">Node.js</span>
+            <span class="marquee-item">C#</span>
+            <span class="marquee-item">Docker</span>
+            <span class="marquee-item">PostgreSQL</span>
+            <span class="marquee-item">Java</span>
+            <span class="marquee-item">TypeScript</span>
+            <span class="marquee-item">React</span>
+            <span class="marquee-item">Spring Boot</span>
+            <span class="marquee-item">Node.js</span>
+            <span class="marquee-item">C#</span>
+            <span class="marquee-item">Docker</span>
+            <span class="marquee-item">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div
+          class="mx-auto mt-12 grid max-w-7xl gap-10 px-4 md:mt-16 md:grid-cols-12 md:px-8"
+        >
+          <div class="reveal md:col-span-5">
+            <h3 class="mb-4 text-sm text-muted">Languages</h3>
+            <ul class="flex flex-wrap gap-2">
+              <li class="chip chip-strong">Java</li>
+              <li class="chip chip-strong">TypeScript</li>
+              <li class="chip chip-strong">JavaScript</li>
+              <li class="chip chip-strong">C#</li>
+              <li class="chip">Kotlin</li>
+              <li class="chip">SQL (PostgreSQL)</li>
+              <li class="chip">NoSQL (MongoDB)</li>
+              <li class="chip">HTML</li>
+              <li class="chip">CSS</li>
+            </ul>
+          </div>
+          <div class="reveal md:col-span-4" style="--d: 80ms">
+            <h3 class="mb-4 text-sm text-muted">Frameworks and libraries</h3>
+            <ul class="flex flex-wrap gap-2">
+              <li class="chip chip-strong">Spring Boot</li>
+              <li class="chip chip-strong">React</li>
+              <li class="chip chip-strong">Node.js</li>
+              <li class="chip">.NET</li>
+              <li class="chip">Tailwind CSS</li>
+              <li class="chip">Flask</li>
+              <li class="chip">Express</li>
+              <li class="chip">Next.js</li>
+            </ul>
+          </div>
+          <div class="reveal md:col-span-3" style="--d: 160ms">
+            <h3 class="mb-4 text-sm text-muted">Tools</h3>
+            <ul class="flex flex-wrap gap-2">
+              <li class="chip chip-strong">Git</li>
+              <li class="chip chip-strong">Docker</li>
+              <li class="chip chip-strong">GitHub Actions</li>
+              <li class="chip">GitLab CI</li>
+              <li class="chip">Visual Studio</li>
+              <li class="chip">VS Code</li>
+              <li class="chip">Linux</li>
+              <li class="chip">Google Colab</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="section" aria-labelledby="edu-title">
+        <h2 id="edu-title" class="h2 reveal">Education</h2>
+        <ol class="timeline reveal mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-10">
+          <li class="relative pl-10 md:pt-12 md:pl-0">
+            <span class="node" aria-hidden="true"></span>
+            <p class="font-mono text-sm text-muted">Aug 2023 - May 2026</p>
+            <h3 class="mt-3 text-3xl font-semibold tracking-[-0.03em]">
+              Dawson College
+            </h3>
+            <p class="mt-1 text-muted">DEC in Computer Science Technology</p>
+          </li>
+          <li class="relative pl-10 md:pt-12 md:pl-0">
+            <span class="node node-now" aria-hidden="true"></span>
+            <p class="font-mono text-sm text-muted">Sep 2026 - May 2029</p>
+            <h3 class="mt-3 text-3xl font-semibold tracking-[-0.03em]">
+              Concordia University
+            </h3>
+            <p class="mt-1 text-muted">Bachelor of Computer Science</p>
+            <span class="chip chip-strong mt-4">Current</span>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Contact and resume -->
+      <section id="contact" class="section" aria-labelledby="contact-title">
+        <div class="card spot reveal p-6 md:p-14">
+          <div class="grid-bg" aria-hidden="true"></div>
+          <div class="relative">
+            <h2
+              id="contact-title"
+              class="text-6xl leading-[0.9] font-semibold tracking-[-0.055em] md:text-9xl"
+            >
+              Let's talk.
+            </h2>
+            <p class="mt-6 max-w-[44ch] text-lg text-muted">
+              Have a role, a project, or a question? Send me a note.
+            </p>
+            <div class="mt-10 flex flex-wrap items-center gap-3">
+              <a href="mailto:antoineoparin@gmail.com" class="btn btn-primary"
+                ><i class="ph ph-envelope-simple" aria-hidden="true"></i> Email
+                me</a
+              >
+              <button
+                type="button"
+                class="btn btn-ghost"
+                data-copy="antoineoparin@gmail.com"
+                aria-label="Copy email address"
+              >
+                <i class="ph ph-copy" aria-hidden="true"></i>
+                <span aria-live="polite">antoineoparin@gmail.com</span>
+              </button>
+              <a
+                href="https://www.linkedin.com/in/antoineoparin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost"
+                ><i class="ph ph-linkedin-logo" aria-hidden="true"></i>
+                LinkedIn</a
+              >
+              <a
+                href="https://github.com/AntoineOparin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost"
+                ><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="resume"
+          class="card reveal mt-4 flex flex-col justify-between gap-6 p-6 md:flex-row md:items-center md:p-10"
+        >
+          <div class="flex items-center gap-5">
+            <span class="tile h-14 w-14 text-2xl text-accent" aria-hidden="true"
+              ><i class="ph ph-file-text"></i
+            ></span>
+            <div>
+              <h3 class="text-xl font-semibold tracking-tight">Resume</h3>
+              <p class="text-sm text-muted">Updated Fall 2026, PDF</p>
+            </div>
+          </div>
           <div class="flex flex-wrap gap-3">
             <a
               href="./AntoineOparin_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-block rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
+              class="btn btn-ghost"
               aria-label="Open resume PDF in a new tab"
-              >Open Resume</a
-            >
+              >Open <i class="ph ph-arrow-up-right" aria-hidden="true"></i
+            ></a>
             <a
               href="./AntoineOparin_CV.pdf"
               download
-              class="inline-block rounded-md bg-[#4198F4] text-[#0b1220] font-semibold px-5 py-2 hover:opacity-90"
+              class="btn btn-primary"
               aria-label="Download resume PDF"
-              >Download PDF</a
-            >
+              >Download PDF
+              <i class="ph ph-download-simple" aria-hidden="true"></i
+            ></a>
           </div>
-        </section>
+        </div>
+      </section>
+    </main>
 
-        <!-- Skills -->
-        <section id="skills" aria-label="Skills" class="space-y-5">
-          <h2 class="text-2xl font-extrabold text-[#00C2D9]">Skills</h2>
-          <div class="grid gap-6 md:grid-cols-2">
-            <div>
-              <h3 class="text-[#8EDEEA] font-semibold mb-3">Core</h3>
-              <ul class="flex flex-wrap gap-2 list-none">
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  TypeScript
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  JavaScript
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  React
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Node.js
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  C#
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Java
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Python
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Flask
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  HTML
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  CSS
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Tailwind CSS
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  PostgreSQL
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  MongoDB
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-[#8EDEEA] font-semibold mb-3">
-                Tools & Practices
-              </h3>
-              <ul class="flex flex-wrap gap-2 list-none">
-                <!-- TODO: Replace or expand based on CV -->
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Version Control (Git)
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  REST APIs
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Unit Testing
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  Docker
-                </li>
-                <li class="bg-gray-700 text-[#8EDEEA] rounded-full px-4 py-2">
-                  CI/CD
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-        <!-- Contact -->
-        <section id="contact" aria-label="Contact" class="space-y-3">
-          <h2 class="text-2xl font-extrabold text-[#00C2D9]">Contact</h2>
-          <p class="text-[#93A4AE]">
-            Want to collaborate or chat? Get in touch.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <a
-              href="mailto:antoineoparin@example.com"
-              class="rounded-md bg-[#4198F4] text-[#0b1220] font-semibold px-5 py-2 hover:opacity-90"
-              >Email Me</a
-            >
-            <a
-              href="https://www.linkedin.com/in/antoineoparin/"
-              target="_blank"
-              class="rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
-              >LinkedIn</a
-            >
-            <a
-              href="https://github.com/AntoineOparin"
-              target="_blank"
-              class="rounded-md bg-[#2f373b] text-[#8EDEEA] font-semibold px-5 py-2 hover:bg-gray-500"
-              >GitHub</a
-            >
-          </div>
-        </section>
-      </main>
-
-      <footer class="my-12 text-center text-[#93A4AE]">
-        © <span id="year"></span> Antoine Oparin
-      </footer>
-    </div>
-
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <footer
+      class="mx-auto flex max-w-7xl flex-col justify-between gap-4 border-t border-line px-4 py-10 text-sm text-muted md:flex-row md:px-8"
+    >
+      <p>© <span data-year></span> Antoine Oparin</p>
+      <a href="#home" class="transition-colors hover:text-fg"
+        >Back to top <i class="ph ph-arrow-up" aria-hidden="true"></i
+      ></a>
+    </footer>
   </body>
 </html>
