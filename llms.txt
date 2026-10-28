@@ -21,6 +21,7 @@
 
 - [Ramifie](https://ramifie.com): Daily crossword-style word puzzle about building one connected grid of valid words (2025 - present). 50+ recurring players; time-to-playable on 3G cut from 2.5s to 1.9s. React, TypeScript, Tailwind CSS, AWS Lambda, Cloudflare Pages, GitHub Actions.
 - [ToneBridge](https://github.com/AntoineOparin/ToneBridge): Perfect-pitch training game built with a team of 3 at DawsHacks 2026. In-browser pitch detection, a 10-level note curriculum and real-time Socket.io duels with ELO ratings. React, TypeScript, Node.js, Socket.io, PostgreSQL.
+- [NetWatch](https://github.com/AntoineOparin/netwatch): Home network monitor answering "why is my Xbox lagging?" (2026). Go agents stream bandwidth, per-app usage and Wi-Fi signal to a hub that detects lag, separates Wi-Fi problems from ISP congestion and names the computer and app responsible. Go, TypeScript, React, SQLite, Protobuf, GitHub Actions.
 - [Hair Salon Appointments](https://gitlab.com/thomas-k/dw-420w25sec1-prj-grp3-koleboshyna): School project. Full-stack appointment and reporting system for a hair salon. React, Flask, PostgreSQL, Docker, Python, JavaScript.
 - [Fireworks Simulator](https://gitlab.com/dawson-cst-cohort-2026/510/section1/oparin/fireworks): School project. Modular particle-system simulator and reusable rendering libraries for fireworks. C#, .NET 8, MSTest, MonoGame.
 
